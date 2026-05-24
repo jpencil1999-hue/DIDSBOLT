@@ -13,8 +13,8 @@ if (!supabaseUrl || supabaseUrl.includes('YOUR_PROJECT_ID')) {
   );
 }
 
-export const supabase = createClient(supabaseUrl || '', supabaseKey || '');
-
 // Quick connectivity check – resolves true/false
 export const isSupabaseReady = () =>
   Boolean(supabaseUrl && !supabaseUrl.includes('YOUR_PROJECT_ID') && supabaseKey && !supabaseKey.includes('YOUR_ANON_KEY'));
+
+export const supabase = isSupabaseReady() ? createClient(supabaseUrl, supabaseKey) : null;
